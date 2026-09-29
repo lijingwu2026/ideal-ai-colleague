@@ -1,8 +1,15 @@
 # Turn your AI agent into your ideal colleague
 
-A **work agreement** (`CLAUDE.md`) and **communication requirements** (an output style) for anyone who hands
-real work to an AI agent — in any role, not only engineering. I use them every day with Claude Code.
-Install with a plugin, two `curl` lines, or one prompt to your agent. A/B-tested where I could test them, with a starter kit to test them on your own agent.
+**Onboard your AI agent like a new hire.** A **work agreement** (`CLAUDE.md`) for how the agent works with you, and
+**communication requirements** (an output style) for how it reports to you. For anyone who hands real work to an
+AI agent, in any role, not only engineering. I use them every day with Claude Code.
+
+**What's different:** key rules are A/B-tested, with before/after results published, including the
+additions that made no difference and were cut. The repo also ships the test tool, so you can check them on your own agent.
+
+[Install](#install) · [What's inside](#whats-inside) · [Evidence](EVIDENCE.md) · [Test it yourself](TESTING.md)
+
+![The work agreement and the communication requirements, grouped by working moment](assets/whats-inside.png)
 
 ## The problems
 
