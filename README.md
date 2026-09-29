@@ -9,8 +9,6 @@ additions that made no difference and were cut. The repo also ships the test too
 
 [Install](#install) · [What's inside](#whats-inside) · [Evidence](EVIDENCE.md) · [Test it yourself](TESTING.md)
 
-![The work agreement and the communication requirements, grouped by working moment](assets/whats-inside.png)
-
 ## The problems
 
 An agent with no working agreement behaves like a talented new hire nobody onboarded:
