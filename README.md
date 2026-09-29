@@ -1,7 +1,7 @@
 # Turn your AI agent into a reliable colleague
 
 **Onboard your AI agent like a new hire.** A **work agreement** (`CLAUDE.md`) for how the agent works with you, and
-**communication requirements** (an output style) for how it reports to you. For anyone who hands real work to an
+**communication requirements** (an output style) for how it communicates with you. For anyone who hands real work to an
 AI agent, in any role, not only engineering. I use them every day with Claude Code.
 
 **What's different:** key rules are A/B-tested, with before/after results published, including the
@@ -51,7 +51,7 @@ Also in the file: commit finished work without being asked (☑️ tested, but a
 
 ### Part 2 — The communication requirements ([`output-styles/colleague-voice.md`](output-styles/colleague-voice.md))
 
-How the agent reports to you — like a senior colleague reporting to a busy manager.
+How the agent communicates with you — answers, progress updates, escalations, requests for your action and decisions — like a senior colleague working with a busy manager.
 
 | Rule | What the agent does differently | Why it's there |
 |---|---|---|
