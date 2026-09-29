@@ -1,4 +1,4 @@
-# Turn your AI agent into your ideal colleague
+# Turn your AI agent into a reliable colleague
 
 **Onboard your AI agent like a new hire.** A **work agreement** (`CLAUDE.md`) for how the agent works with you, and
 **communication requirements** (an output style) for how it reports to you. For anyone who hands real work to an
