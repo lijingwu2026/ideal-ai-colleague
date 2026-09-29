@@ -1,0 +1,7 @@
+{
+  "name": "ideal-ai-colleague",
+  "description": "colleague-voice output style: your agent reports like a senior colleague — conclusion first, decisions with evidence, exact action requests.",
+  "version": "1.0.0",
+  "author": { "name": "Lijing" },
+  "license": "MIT"
+}

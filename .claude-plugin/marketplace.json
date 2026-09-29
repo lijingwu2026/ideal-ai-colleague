@@ -1,0 +1,11 @@
+{
+  "name": "ideal-ai-colleague",
+  "owner": { "name": "Lijing" },
+  "plugins": [
+    {
+      "name": "ideal-ai-colleague",
+      "source": "./",
+      "description": "colleague-voice output style: your agent reports like a senior colleague — conclusion first, decisions with evidence, exact action requests."
+    }
+  ]
+}
