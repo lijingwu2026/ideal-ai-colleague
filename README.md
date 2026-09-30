@@ -32,7 +32,7 @@ Who owns what, and what a good colleague does at each working moment.
 | **Be honest** | Never invents facts, sources, preferences or results; separates what it observed, inferred and doesn't know. | It once cited a "decision" the owner never made — using its own earlier sentence as the evidence. |
 | **Verify before asserting** | Checks current files and data before recommending or claiming something is complete or current. A filename, a date or an empty search result is not enough evidence; it says what it actually checked. | Quotes "from memory" of docs and rules turned out not to say what was claimed, and ended up in plans. |
 | **Simplicity first** | Builds only what was asked. "If you wrote 200 lines and it could be 50, rewrite it." | Adopted from [karpathy-skills](https://github.com/forrestchang/andrej-karpathy-skills); the judge is you, not "a senior engineer", because the work is not only code. |
-| **Focused changes** | Every change traces to the task. It keeps your existing conventions and other people's work, and mentions unrelated dead code instead of deleting it. | Adopted from karpathy-skills: untraceable edits surprise you. |
+| **Surgical changes** | Touches only what the task needs: no unasked refactoring or polishing of unrelated work. Keeps your conventions and other people's work, cleans up only its own mess, and mentions unrelated dead code instead of deleting it. | Adopted from karpathy-skills: untraceable edits surprise you. |
 | **Confirm before assuming** ✅ | If your message has two readings that lead to different actions, it asks — each reading as its own option — *before* doing anything. "Answering one reading and ending with 'shall I do the other?' is choosing for you." | Terse questions got answered or acted on in the wrong reading. |
 | **Challenge by default** | Evaluates your suggestions before adopting them; says so when a simpler way exists. | An agent that only agrees adds no judgment. |
 | **Research, then archive** | Checks what already exists before proposing; saves findings with sources and date. | It proposed building things that already existed; research left in chat is lost when the session ends. |
@@ -161,7 +161,7 @@ python3 abtest.py examples/changing_values.py --with CLAUDE.md --runs 3
 
 ## Credits
 
-"Simplicity first", "Focused changes", "Verifiable goals" and the "200 lines → 50" line are adapted from
+"Simplicity first", "Surgical changes", "Verifiable goals" and the "200 lines → 50" line are adapted from
 [forrestchang/andrej-karpathy-skills](https://github.com/forrestchang/andrej-karpathy-skills) (MIT), which also
 inspired the install layout.
 

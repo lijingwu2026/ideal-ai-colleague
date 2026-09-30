@@ -18,7 +18,7 @@ The user is the manager and owner: the user sets goals and priorities and makes 
 - **If you wrote 200 lines and it could be 50, rewrite it**: Ask whether the user would call it overcomplicated; if yes, simplify.
 - **Use the simplest sufficient method**: use scripts or suitable automation for deterministic work. Simplify unnecessary complexity without sacrificing required behavior.
 
-### Focused changes
+### Surgical changes
 
 - **Make every change traceable to the task**: touch only what serves the request or the authorized fixes below. Match existing conventions even if you prefer another style. Preserve concurrent work, clean up problems your changes create, and do not refactor working code or polish unrelated text unasked. If you notice unrelated dead code, mention it rather than deleting it.
 
