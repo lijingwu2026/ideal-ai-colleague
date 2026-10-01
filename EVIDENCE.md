@@ -12,6 +12,47 @@ Scenarios were written by my agent from real incidents in my own work; one uses 
 | **Confirm before assuming** (CLAUDE.md) | A terse, ambiguous message ("what about the tests for empty invoices?") in a small repo. | The reply is a question naming each reading as an option, before any tool use. | Previous wording: **0/3** — each run investigated first, then answered one reading. | **3/3** |
 | **"A change is material when…"** (output style) | The agent removes tools from a helper agent and reports the change. | The report names the capability that was lost. | **1/3** | **3/3** (blind re-grade; thin margin) |
 
+## The strongest test: an incomplete request (four arms)
+
+One clause was tested with a control that isolates it from the rest of its bullet, plus a placebo. It is the
+only test here with that design, so read it first.
+
+**The clause** — the second half of `Confirm before assuming`: when the request is missing a value or premise
+the user never gave, and you cannot settle it from the project, a precedent or a convention they set, say what
+you take the goal to be, name the gap, and keep asking rather than inventing one.
+
+**The request**, identical in every arm, in a small Python repo: "make an image for the top of the README
+showing what this repo is for." The missing values are the image's size and style.
+
+| Arm | What its CLAUDE.md held | Asked for the missing values |
+|---|---|---|
+| no CLAUDE.md | — | **0/2** |
+| placebo | the clause swapped for an equally long irrelevant one (325 B vs 327 B) | **0/2** |
+| **control** | the whole file **minus this clause** — the ambiguity half kept | **0/5** |
+| **as shipped** | the file with the clause | **5/5** |
+
+Fisher exact, two-sided: **p = 0.0079**. The placebo arm is what rules out "the file just got longer".
+
+Two more arms, same clause, same request, different repo contents:
+
+| What the repo's own convention fixed | Correct behaviour | Without the clause | With it |
+|---|---|---|---|
+| the image's size and style, outright | use it, don't ask | 1/2 | 1/2 — and **0/2 asked**, so the clause does not misfire |
+| only colours; silent on size and style | ask about size and style | **0/3** — one run cited the colour doc as licence and invented the rest | **3/3** |
+
+**What the control arm actually did** is worth knowing before you decide whether you need this clause: all five
+runs picked a format themselves and got on with it — one said, verbatim, "the format is my call: a Mermaid block
+directly in the README" — and not one of the five ever mentioned size. The failure this clause prevents is not
+"forgot to ask". It is "quietly decided".
+
+**One third of the clause does not work.** It asks for three things. Two happen: naming the missing value (5/5
+and 3/3) and not inventing one (5/5 and 3/3). The third — saying what you take the goal to be — happened in 1
+of 5 runs. Adopt it for the first two; don't expect the third.
+
+Grading was blind: replies were stripped of the clause's own phrasing, shuffled, and classified by a different
+model against a rubric written down before any run. 24 runs, one model, `--effort high`. Single-turn, so the
+"keep asking until" part is untested. One request shape, so it does not transfer to other kinds of missing input.
+
 ## Whole-file tests (no CLAUDE.md vs. the full file — the line is not isolated)
 
 | Behaviour | Pass rule | No CLAUDE.md | Full CLAUDE.md |
@@ -71,9 +112,10 @@ recommended prompt + ADOPT.md works, not ADOPT.md alone.
 - **Small n.** 3 runs per arm. 3/3 is consistent with a true pass rate as low as ~37% (one-sided 95% bound).
   Read results as direction, not rates.
 - **Single-turn, cold-start scenarios.** Long sessions behave differently.
-- **"Confirm before assuming":** the tested sentence did not yet include the closing "Do not hide confusion…" clause.
-  On the prompt the rule itself uses as its example, the current full line scored 3/3 — but that prompt is partly
-  "following the example", so the new-phrasing result above is the main evidence.
+- **"Confirm before assuming" is two halves now.** The 3/3 in the first table is the ambiguity half, measured
+  before the incomplete-request half existed; that half has its own four-arm test above. On the prompt the rule
+  uses as its own example, a pass is partly "following the example", so the new-phrasing figure is the main
+  evidence for the ambiguity half.
 - **Whole-file tests don't isolate a line.** In the "changing values" baseline, runs hard-coded the timeout; the
   migration count was the weaker signal.
 - **Graders.** Scripted graders for the whole-file tests were checked on 19 mock cases first. One automatic grader

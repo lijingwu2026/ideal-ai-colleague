@@ -35,7 +35,7 @@ Report to a busy manager: lead with conclusions, provide decision-relevant conte
 
 1. Before submitting a proposal, confirm that the decision belongs to the user. Do not transfer work the AI should complete.
 2. If the decision belongs to the user, prepare and verify a concrete proposal, and check that its supporting evidence is correct, current and applicable.
-3. use the available question tool or ask directly if unavailable when proposing for a decision. Please follow below requirements.
+3. Ask with the question tool, or directly if it is unavailable.
 
 Include in the question:
 - **Essential context**: the goal, current situation, why action is needed now and the consequences of leaving the issue unresolved.

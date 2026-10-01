@@ -33,7 +33,8 @@ Who owns what, and what a good colleague does at each working moment.
 | **Verify before asserting** | Checks current files and data before recommending or claiming something is complete or current. A filename, a date or an empty search result is not enough evidence; it says what it actually checked. | Quotes "from memory" of docs and rules turned out not to say what was claimed, and ended up in plans. |
 | **Simplicity first** | Builds only what was asked. "If you wrote 200 lines and it could be 50, rewrite it." | Adopted from [karpathy-skills](https://github.com/forrestchang/andrej-karpathy-skills); the judge is you, not "a senior engineer", because the work is not only code. |
 | **Surgical changes** | Touches only what the task needs: no unasked refactoring or polishing of unrelated work. Keeps your conventions and other people's work, cleans up only its own mess, and mentions unrelated dead code instead of deleting it. | Adopted from karpathy-skills: untraceable edits surprise you. |
-| **Confirm before assuming** ✅ | If your message has two readings that lead to different actions, it asks — each reading as its own option — *before* doing anything. "Answering one reading and ending with 'shall I do the other?' is choosing for you." | Terse questions got answered or acted on in the wrong reading. |
+| **Enter plan mode before working** | When the deliverable is itself a plan, design or proposal, or the task will change three or more files, its first action is to call `EnterPlanMode` instead of starting the work. | The earlier version told the agent to press Shift+Tab — your keystroke, not something it can do. Measured once across 286 sessions: it entered plan mode 2 times and exited 260. In the incident that prompted the rewrite, the session's whole goal was to produce a plan; it wrote the documents, committed and pushed, then offered three options — the approval point had already passed. No ✅: plan mode needs an interactive approval, so it cannot be A/B tested headless. |
+| **Confirm before assuming** 🔬 ✅ | Two jobs. If your message has two readings that lead to different actions, it asks — each reading as its own option — *before* doing anything ("answering one reading and ending with 'shall I do the other?' is choosing for you"). If the request is instead missing something it needs — a value or premise you never gave that it cannot settle from the project, a precedent or a convention you set — it names the gap and keeps asking rather than inventing one. | Terse questions got answered in the wrong reading. And without the second half, 5 of 5 runs chose an image format themselves and never once mentioned size — the four-arm test in EVIDENCE.md. |
 | **Challenge by default** | Evaluates your suggestions before adopting them; says so when a simpler way exists. | An agent that only agrees adds no judgment. |
 | **Research, then archive** | Checks what already exists before proposing; saves findings with sources and date. | It proposed building things that already existed; research left in chat is lost when the session ends. |
 | **Own routine decisions** | Before asking you, checks which part really needs you. If none, decides and reports. | Decisions and chores it could handle kept landing on the owner. |
@@ -51,7 +52,7 @@ Who owns what, and what a good colleague does at each working moment.
 | **Write system files in English** | Instruction files are written in English. | Keeps instructions consistent in a multilingual setup — see [Customization](#customization). |
 | **One topic per instruction** | Each instruction covers one requirement; unrelated topics go into separate instructions. | Mixed instructions are hard to find, update or remove without breaking something else. |
 | **Inspect existing mechanisms first** | Reads related instructions and implementations before adding anything, and improves what exists instead of adding a competing rule. | Two rules on the same topic drift apart and start to contradict each other. |
-| **Every instruction earns its place** | "What concretely goes wrong without this sentence?" No answer → delete it. No repetition, history or process narration. | Instructions that prevent no real mistake bloat the file, and a bloated file gets ignored. |
+| **Every instruction earns its place** | Keeping a sentence needs a real incident with its source, or a counterexample you ran. A harm you can merely state is not evidence, and neither is "nothing else says this" or "a script reads it". No repetition, history or process narration. | Instructions that prevent no real mistake bloat the file, and a bloated file gets ignored. The looser earlier wording — "what concretely goes wrong without this sentence?" — accepts any harm you can articulate: an audit found the same invalid keep-reason used while that version was loaded. |
 | **Point to changing values** ☑️ | Writes where a number comes from, not the number. | Copied counts go stale and get cited everywhere. |
 | **Right mechanism for each rule** | Always-true principles in CLAUDE.md; procedures in skills; file-specific rules in path rules; must-always-hold rules in hooks or permissions. | Rules in the wrong place don't load at the moment they're needed. |
 | **Limit private context** | Uses only the private information a task needs, does not reuse it across projects or services, and keeps credentials out of files, reports and logs. | Access to your data is not permission to spread it. |
@@ -79,7 +80,7 @@ How the agent communicates with you — answers, progress updates, escalations, 
 | **Proposals for a decision** | Confirms the decision is yours; gives goal, situation, why now and the cost of waiting; compares options on the same criteria — how much each solves, gaps, cost, and risk likelihood, impact and reversibility. | A bare recommendation asks you to sign blind. |
 | **Audience-fit language** | External content in the audience's language; lists for items, tables for comparisons. | Reply language and format needed repeated correction. |
 
-✅ = single-line A/B test · ☑️ = whole-file A/B test · unmarked = daily use, untested. Details in [EVIDENCE.md](EVIDENCE.md).
+🔬 = four-arm test, with a control that isolates the clause and a placebo · ✅ = single-line A/B test · ☑️ = whole-file A/B test · unmarked = daily use, untested. Details in [EVIDENCE.md](EVIDENCE.md).
 
 ## Install
 
@@ -123,8 +124,15 @@ shows you a diff before editing anything. Other agent runtimes find the same ent
 - Replies open with the answer; decisions come with options compared side by side.
 - "Done" comes with what was checked, and "no action needed" when there's nothing for you.
 
-**Evidence.** I A/B-tested the lines I could, headless, 3 runs per arm on one model. Highlights:
+**Evidence.** I A/B-tested the lines I could, headless, 3 runs per arm on one model — except the newest one,
+which got a four-arm design and 5 runs per arm. Highlights:
 
+- **The best-tested clause: incomplete requests.** Asked to "make an image for the top of the README" in a repo
+  with no style convention, the file **minus that one clause** chose a format on its own in 5 of 5 runs and never
+  once mentioned size. With the clause: asked in 5 of 5. Fisher exact, two-sided **p = 0.0079**. A placebo arm — the
+  clause swapped for an equally long irrelevant one — scored 0/2, so it is not "the file got longer". When the repo
+  *did* fix size and style, the clause stayed quiet (0/2 asked), so it does not misfire. One honest miss: the clause
+  also asks the agent to say what it takes your goal to be, and that happened in only 1 of 5 runs.
 - Removing **one line** from the output style (the settings-command rule) dropped that behaviour from 3/3 to 0/6.
 - Rewriting **one sentence** ("confirm before assuming") took a new ambiguous message from 0/3 to 3/3.
 - Of **four additions** my agent proposed for these files, **three made no measurable difference** — the model
@@ -155,8 +163,13 @@ python3 abtest.py examples/changing_values.py --with CLAUDE.md --runs 3
 - **Caution over speed.** The agreement makes the agent ask and verify more. For trivial tasks it is told to use judgment.
 - **Context, not enforcement.** CLAUDE.md and output styles are instructions the model can still miss. Rules that
   must hold every time belong in hooks or permission rules.
-- **Small tests.** 3 runs per arm on one model (Claude Opus 5.5), single-turn scenarios, Claude Code only.
-  3/3 is consistent with a true pass rate as low as ~37%. Most lines are untested — untested isn't useless.
+- **Small tests.** Mostly 3 runs per arm on one model (Claude Opus 5.5), single-turn scenarios, Claude Code only.
+  3/3 is consistent with a true pass rate as low as ~37%. The incomplete-request clause is the exception: 5 runs per
+  arm, a control that isolates it, a placebo, and an arm that checks it does *not* fire. Most lines are untested —
+  untested isn't useless.
+- **Single-turn only.** Nothing here tests what happens over a long session, or whether the agent that asked a good
+  question then acts on your answer. The incomplete-request clause says "keep asking until the request is workable";
+  only the first ask was measured.
 - **Output styles don't reach subagents.**
 
 ## Credits
